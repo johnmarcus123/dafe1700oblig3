@@ -1,22 +1,22 @@
 let billetter = [];
 
 function bestillBillett() {
-    const film = document.getElementById('film').value;
-    const antall = document.getElementById('antall').value;
-    const fornavn = document.getElementById('fornavn').value;
-    const etternavn = document.getElementById('etternavn').value;
-    const telefonnr = document.getElementById('telefonnr').value;
-    const epost = document.getElementById('epost').value;
+    const film = $('film').val();
+    const antall = $('antall').val();
+    const fornavn = $('fornavn').val();
+    const etternavn = $('etternavn').val();
+    const telefonnr = $('telefonnr').val();
+    const epost = $('epost').val();
 
     let telefonRegex = /^\d{8}$/;
     let epostRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    document.getElementById('filmFeil').textContent = '';
-    document.getElementById('antallFeil').textContent = '';
-    document.getElementById('fornavnFeil').textContent = '';
-    document.getElementById('etternavnFeil').textContent = '';
-    document.getElementById('telefonFeil').textContent = '';
-    document.getElementById('epostFeil').textContent = '';
+    $('filmFeil').textContent = '';
+    $('antallFeil').textContent = '';
+    $('fornavnFeil').textContent = '';
+    $('etternavnFeil').textContent = '';
+    $('telefonFeil').textContent = '';
+    $('epostFeil').textContent = '';
 
     if (film && antall && fornavn && etternavn && telefonRegex.test(telefonnr) && epostRegex.test(epost)) {
         let billett = {
@@ -70,6 +70,7 @@ function visAlleBilletter() {
 }
 
 function slettAlleBilletter() {
-    billetter = [];
-    document.getElementById('alleBilletter').innerHTML = "";
+    $.get( "/slettAlle", function( data ) {
+        visAlleBilletter();
+    }
 }
