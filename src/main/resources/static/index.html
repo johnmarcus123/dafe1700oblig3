@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+<h1>Bestilling av kinobilletter</h1>
+
+<form id="billetForm">
+    <label for="film">Film:</label>
+    <select id="film" required>
+        <option value="">Velg en film</option>
+        <option value="harrypotter">Harry Potter og de Vises sten</option>
+        <option value="ringenes">Ringenes Herre</option>
+        <option value="hobbit">Hobbitten</option>
+    </select>
+    <span id="filmFeil" style="color:  #ff0000"></span> <br><br>
+
+    Antall:
+    <input type="number" id="antall" name="antall" required>
+    <span id="antallFeil"></span>
+    <br><br>
+
+    <label for="fornavn">Fornavn:</label>
+    <input id="fornavn" type="text" required />
+    <span id="fornavnFeil" style="color:#ff0000;"></span>
+    <br>
+
+    <label for="etternavn">Etternavn:</label>
+    <span id="etternavnFeil" style="color:#ff0000;"></span>
+    <input type="text" id="etternavn" required>
+    <br>
+
+    <label for="telefonnr">Telefonnr:</label>
+    <span id="telefonFeil" style="color:#ff0000;"></span>
+    <input type="tel" id="telefonnr" required>
+    <br>
+
+    <label for="epost">Epost:</label>
+    <span id="epostFeil" style="color:#ff0000;"></span>
+    <input type="email" id="epost" required>
+    <br>
+
+    <button type="button" onclick="bestillBillett()">Bestill</button>
+    <div id="skaffInfo"></div>
+    <br><br>
+    Billettene:
+    <div id="alleBilletter"></div>
+    <button type="button" onclick="slettAlleBilletter()">Slett alt sammen!!!</button>
+    <br>
+
+</form>
+
+</body>
+</html>
