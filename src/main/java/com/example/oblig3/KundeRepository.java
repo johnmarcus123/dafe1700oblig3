@@ -23,6 +23,14 @@ public class KundeRepository {
         List<Bestille> alleKunder = db.query(sql, new BeanPropertyRowMapper<>(Bestille.class));
         return alleKunder;
     }
+    public void oppdaterKunde(Bestille innKunde){
+        String sql = "UPDATE Bestille SET film=?, antall=?, fornavn=?, etternavn=?, adresse=?, telefonnr=?, epost=? WHERE id=?";
+        db.update(sql, innKunde.getFilm(), innKunde.getAntall(), innKunde.getFornavn(), innKunde.getEtternavn(), innKunde.getTelefonnr(), innKunde.getEpost());
+    }
+    public void slettKunde(){
+        String sql = "DELETE FROM Bestille WHERE id=?";
+        db.update(sql);
+    }
     public void slettAlleKunder(){
         String sql = "DELETE FROM Bestille";
         db.update(sql);
