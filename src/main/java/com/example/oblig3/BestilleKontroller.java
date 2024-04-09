@@ -16,25 +16,30 @@ public class BestilleKontroller {
 
 
     @PostMapping("/lagre")
-    public void lagreKunde(Bestille innKunde){
-        rep.lagreKunde(innKunde);
+    public void lagreBilett(Bestille innKunde){
+        rep.lagreBilett(innKunde);
     }
     @GetMapping("/hentAlle")
     public List<Bestille> hentAlle(){
-        return rep.hentAlleKunder();
+        return rep.hentAlleBiletter();
+    }
+
+    @GetMapping("/hentBilett")
+    public Bestille hentBilett(int id){
+        return rep.hentBilett(id);
     }
 
     @PostMapping ("/oppdater")
     public void oppdaterKunde(Bestille innKunde){
-        rep.oppdaterKunde(innKunde);
+        rep.oppdaterBilett(innKunde);
     }
     @DeleteMapping("/slettEn")
     public void SlettEn(){
-        rep.slettKunde();
+        rep.slettBilett();
     }
 
     @DeleteMapping("/slettAlle")
     public void slettAlle(){
-        rep.slettAlleKunder();
+        rep.slettAlleBiletter();
     }
 }

@@ -1,12 +1,20 @@
 package com.example.oblig3;
 
 public class Bestille {
+    private int id;
     private String film;
     private int antall;
     private String fornavn;
     private String etternavn;
     private String telefonnr;
     private String epost;
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getFilm() {
         return film;
     }

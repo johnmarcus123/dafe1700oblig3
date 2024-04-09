@@ -5,11 +5,10 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="endreBiletten.js"></script>
 </head>
 <body>
-<h1>Bestilling av kinobilletter</h1>
-
+<h1>Endre Kunde</h1>
 <form id="billetForm">
     <label for="film">Film:</label>
     <select id="film" required>
@@ -21,6 +20,7 @@
     <span id="filmFeil" style="color:  #ff0000"></span> <br><br>
 
     Antall:
+    <label for="antall"></label>
     <input type="number" id="antall" name="antall" required>
     <span id="antallFeil"></span>
     <br><br>
@@ -44,16 +44,11 @@
     <span id="epostFeil" style="color:#ff0000;"></span>
     <input type="email" id="epost" required>
     <br>
-
-    <button type="button" onclick="bestillBillett()">Bestill</button>
-    <div id="skaffInfo"></div>
-    <br><br>
-    Billettene:
-    <div id="alleBilletter"></div>
-    <button type="button" onclick="slettAlleBilletter()">Slett alt sammen!!!</button>
-    <br>
-
+    <div class="form group">
+        <input type="button" value="Endre" class="btn btn-primary" onclick="endreBiletten()"/>
+    </div>
 </form>
+
 
 </body>
 </html>
