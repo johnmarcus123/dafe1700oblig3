@@ -1,9 +1,8 @@
-package webprog.oblig3;
+package com.example.oblig3;
 
 public class Bestille {
     private String film;
     private int antall;
-    private String adresse;
     private String fornavn;
     private String etternavn;
     private String telefonnr;
@@ -22,13 +21,6 @@ public class Bestille {
 
     public void setAntall(int antall) {
         this.antall = antall;
-    }
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
     }
 
     public String getFornavn() {
