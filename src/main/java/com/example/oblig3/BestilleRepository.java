@@ -44,4 +44,8 @@ public class BestilleRepository {
         String sql = "DELETE FROM Bestille";
         db.update(sql);
     }
+    public void sorterBilletter(Bestille kunde){
+        String sql = "SELECT * FROM Bestille ORDER BY film";
+        db.update(sql, kunde.getFilm());
+    }
 }

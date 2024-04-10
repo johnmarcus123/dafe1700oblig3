@@ -77,3 +77,17 @@ function slettAlle() {
         }
     })
 }
+function sorterDB() {
+    const url = "/sorter";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        success: function() {
+            window.location.href = 'index.html';
+        },
+        error: function(error) {
+            console.error('Error sorting all tickets:', error);
+            alert("An error occurred when sorting all tickets");
+        }
+    });
+}

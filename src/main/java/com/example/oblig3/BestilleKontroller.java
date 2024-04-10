@@ -37,4 +37,9 @@ public class BestilleKontroller {
     public void slettAlle(){
         rep.slettAlleBiletter();
     }
+
+    @PostMapping("/sorter")
+    public void sorter(@RequestBody Bestille kunde){rep.sorterBilletter(kunde);}
 }
+
+
