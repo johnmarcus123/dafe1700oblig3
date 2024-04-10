@@ -49,7 +49,7 @@ public class BestilleRepository {
     }
 
     public List<Bestille> sorterBilletter() {
-        String sql = "SELECT * FROM Bestille ORDER BY film ASC";
+        String sql = "SELECT * FROM Bestille ORDER BY etternavn ASC";
         return db.query(sql, new BeanPropertyRowMapper<>(Bestille.class));
     }
 }
