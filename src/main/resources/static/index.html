@@ -20,7 +20,7 @@
     </select>
     <span id="filmFeil" style="color:  #ff0000"></span> <br><br>
 
-    Antall:
+    <label for="antall">Antall:</label>
     <input type="number" id="antall" name="antall" required>
     <span id="antallFeil"></span>
     <br><br>
@@ -45,15 +45,13 @@
     <input type="email" id="epost" required>
     <br>
 
-    <button type="button" onclick="bestillBillett()">Bestill</button>
+    <button type="button" id="bestillButton" onclick="bestillBillett()">Bestill</button>
     <div id="skaffInfo"></div>
     <br><br>
     Billettene:
     <div id="alleBilletter"></div>
-    <button type="button" onclick="slettAlleBilletter()">Slett alt sammen!!!</button>
+    <button class="btn btn-danger" type="button" onclick="slettAlleBilletter()" id="slettAlleButton">Slett alle</button>
     <br>
-
 </form>
-
 </body>
 </html>

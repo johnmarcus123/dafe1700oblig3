@@ -1,23 +1,19 @@
 package com.example.oblig3;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 public class BestilleKontroller {
 
     @Autowired
-    KundeRepository rep;
-
-
+    BestilleRepository rep;
 
     @PostMapping("/lagre")
-    public void lagreBilett(Bestille innKunde){
-        rep.lagreBilett(innKunde);
+    public void lagreBilett(@RequestBody Bestille kunde){
+        rep.lagreBilett(kunde);
     }
     @GetMapping("/hentAlle")
     public List<Bestille> hentAlle(){
@@ -30,14 +26,13 @@ public class BestilleKontroller {
     }
 
     @PostMapping ("/oppdater")
-    public void oppdaterKunde(Bestille innKunde){
-        rep.oppdaterBilett(innKunde);
+    public void oppdaterBilett(@RequestBody Bestille kunde){
+        rep.oppdaterBilett(kunde);
     }
-    @DeleteMapping("/slettEn")
-    public void SlettEn(){
-        rep.slettBilett();
+    @DeleteMapping("/slettBilett")
+    public void slettEn(@RequestParam("id") int id){
+        rep.slettBilett(id);
     }
-
     @DeleteMapping("/slettAlle")
     public void slettAlle(){
         rep.slettAlleBiletter();

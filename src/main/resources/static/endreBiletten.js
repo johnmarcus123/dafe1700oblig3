@@ -1,6 +1,6 @@
 $(function(){
     const id = window.location.search.substring(1);
-    const url = "/hentEnBilett?" + id;
+    const url = "/hentBilett?" + id;
     $.get(url, function(kunde){
         $('#id').val(kunde.id);
         $('#film').val(kunde.film);
@@ -12,16 +12,28 @@ $(function(){
     });
 });
 
-function endreBiletten(){
+function endreBiletten() {
     const kunde = {
+        id: $('#id').val(),
         film: $('#film').val(),
         antall: $('#antall').val(),
         fornavn: $('#fornavn').val(),
         etternavn: $('#etternavn').val(),
         telefonnr: $('#telefonnr').val(),
         epost: $('#epost').val()
-    }
-    $.post("/oppdaterBilett", kunde, function(){
-        window.location.href = 'index.html';
+    };
+
+    $.ajax({
+        url: "/oppdater",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(kunde),
+        success: function() {
+            window.location.href = 'index.html';
+        },
+        error: function(error) {
+            console.error("Error updating ticket:", error);
+            alert("An error occurred while updating the ticket.");
+        }
     });
 }
