@@ -62,8 +62,18 @@ function slettEnKunde(id) {
     });
 }
 
-function slettAlleBilletter() {
-    $.delete("/slettAlle", function() {
-        window.location.href = 'index.html';
-    });
+function slettAlle() {
+    const url = "/slettAlle";
+    $.ajax({
+        url: url,
+        type: 'DELETE',
+        success: function (){
+            alert('All tickets deletedd successfully');
+            window.location.href = 'index.html';
+        },
+        error: function (error) {
+        console.error('Error deleting all tickets:',error);
+        alert("An error occured when deleting all tickets")
+        }
+    })
 }
