@@ -1,76 +1,128 @@
-let billetter = [];
+$(function(){
+    hentAlleBilletter();
+});
 
 function bestillBillett() {
-    const film = $('film').val();
-    const antall = $('antall').val();
-    const fornavn = $('fornavn').val();
-    const etternavn = $('etternavn').val();
-    const telefonnr = $('telefonnr').val();
-    const epost = $('epost').val();
+    const film = $('#film').val();
+    const antall = $('#antall').val();
+    const fornavn = $('#fornavn').val();
+    const etternavn = $('#etternavn').val();
+    const telefonnr = $('#telefonnr').val();
+    const epost = $('#epost').val();
 
-    let telefonRegex = /^\d{8}$/;
-    let epostRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const epostRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const telefonnrRegex = /^[0-9]{8}$/;
+    const navnRegex = /^[a-zA-ZæøåÆØÅ .\-]+$/;
 
-    $('filmFeil').textContent = '';
-    $('antallFeil').textContent = '';
-    $('fornavnFeil').textContent = '';
-    $('etternavnFeil').textContent = '';
-    $('telefonFeil').textContent = '';
-    $('epostFeil').textContent = '';
+    let isValid = true;
 
-    if (film && antall && fornavn && etternavn && telefonRegex.test(telefonnr) && epostRegex.test(epost)) {
-        let billett = {
-            film: film,
-            antall: antall,
-            fornavn: fornavn,
-            etternavn: etternavn,
-            telefonnr: telefonnr,
-            epost: epost
-        };
+    // Clear previous messages
+    $('.validation-msg').text('');
 
-        billetter.push(billett);
+    if (!film) {
+        $('#filmFeil').text("Vennligst velg en film.");
+        isValid = false;
+    }
+    if (!antall || antall < 1) {
+        $('#antallFeil').text("Antall må være større enn 0.");
+        isValid = false;
+    }
+    if (!navnRegex.test(fornavn)) {
+        $('#fornavnFeil').text("Vennligst oppgi et gyldig fornavn.");
+        isValid = false;
+    }
+    if (!navnRegex.test(etternavn)) {
+        $('#etternavnFeil').text("Vennligst oppgi et gyldig etternavn.");
+        isValid = false;
+    }
+    if (!telefonnrRegex.test(telefonnr)) {
+        $('#telefonFeil').text("Vennligst oppgi et gyldig telefonnummer med 8 sifre.");
+        isValid = false;
+    }
+    if (!epostRegex.test(epost)) {
+        $('#epostFeil').text("Vennligst oppgi en gyldig epost-adresse.");
+        isValid = false;
+    }
 
-        visAlleBilletter();
-
-        document.getElementById('film').value = "";
-        document.getElementById('antall').value = "";
-        document.getElementById('fornavn').value = "";
-        document.getElementById('etternavn').value = "";
-        document.getElementById('telefonnr').value = "";
-        document.getElementById('epost').value = "";
-    } else {
-        if (!film) {
-            document.getElementById('filmFeil').textContent = 'Please select a film.';
-        }
-        if (!antall) {
-            document.getElementById('antallFeil').textContent = 'Please enter the number of tickets.';
-        }
-        if (!fornavn) {
-            document.getElementById('fornavnFeil').textContent = 'Please enter your first name.';
-        }
-        if (!etternavn) {
-            document.getElementById('etternavnFeil').textContent = 'Please enter your last name.';
-        }
-        if (!telefonRegex.test(telefonnr)) {
-            document.getElementById('telefonFeil').textContent = 'Please enter a valid phone number.';
-        }
-        if (!epostRegex.test(epost)) {
-            document.getElementById('epostFeil').textContent = 'Please enter a valid email address.';
-        }
+    if (isValid) {
+        const kunde = { film, antall, fornavn, etternavn, telefonnr, epost };
+        const url = "/lagre";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(kunde),
+            success: function() {
+                window.location.href = 'index.html';
+            }
+        });
+        hentAlleBilletter();
     }
 }
 
-function visAlleBilletter() {
-    let billettListe = "<h2>Alle billetter</h2><table><thead><tr><th>Film</th><th>Antall</th><th>Fornavn</th><th>Etternavn</th><th>Telefon</th><th>Epost</th></tr></thead><tbody>";
-    for (let billett of billetter) {
-        billettListe += "<tr><td>" + billett.film + "</td><td>" + billett.antall + "</td><td>" + billett.fornavn + "</td><td>" + billett.etternavn + "</td><td>" + billett.telefonnr + "</td><td>" + billett.epost + "</td></tr>";
+
+
+function visAlleBilletter(billetter) {
+        let ut = "<table class='table table-striped'>" +
+            "<tr><th>Film</th><th>Antall</th><th>Fornavn</th><th>Etternavn</th><th>Telefon</th><th>Epost</th><th></th></tr>";
+        for (let i=0; i < billetter.length; i++) {
+            ut += "<tr><td>" + billetter[i].film +
+                "</td><td>" + billetter[i].antall + "</td><td>" +
+                billetter[i].fornavn + "</td><td>" +
+                billetter[i].etternavn + "</td><td>" +
+                billetter[i].telefonnr + "</td><td>" + billetter[i].epost + "</td><td>" +
+                "<a class='btn btn-primary' href='endreBiletten.html?id=" + billetter[i].id + "'>Endre</a></td>" +
+                "<td><button class='btn btn-danger' onclick='slettEnKunde(" + billetter[i].id + ")'>Delete</button></td>" +
+                "</tr>";
+        }
+        $('#alleBilletter').html(ut);
     }
-    billettListe += "</tbody></table>";
-    document.getElementById('alleBilletter').innerHTML = billettListe;
+function hentAlleBilletter(){
+    $.get("/hentAlle", function(billetter){
+        visAlleBilletter(billetter);
+    });
 }
 
-function slettAlleBilletter() {
-    $.get( "/slettAlle", function( data ) {
-        visAlleBilletter();
-    }
+
+function slettEnKunde(id) {
+    const url = "/slettBilett?id=" + id;
+    $.ajax({
+        url: url,
+        type: 'DELETE',
+        success: function() {
+            alert('Billetten ble slettet');
+            window.location.href = 'index.html'; // Reload the page or update the UI as needed
+        },
+        error: function(error) {
+            alert("Det oppsto en feil");
+        }
+    });
+}
+
+function slettAlle() {
+    const url = "/slettAlle";
+    $.ajax({
+        url: url,
+        type: 'DELETE',
+        success: function (){
+            alert('Alle billeter ble slettet');
+            window.location.href = 'index.html';
+        },
+        error: function (error) {
+        alert("Det oppsto en feil")
+        }
+    })
+}
+function sorterDB() {
+    const url = "/sorter";
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(sortedBilletter) {
+            visAlleBilletter(sortedBilletter);
+        },
+        error: function(error) {
+            alert("Det skjedde en feil, prøv igjen");
+        }
+    });
 }

@@ -1,10 +1,9 @@
-CREATE TABLE kunde
-(
-    id INTEGER AUTO_INCREMENT NOT NULL,
-    fornavn VARCHAR(255) NOT NULL,
-    etternavn VARCHAR(255) NOT NULL,
-    adresse VARCHAR(255) NOT NULL,
-    telefonnr VARCHAR(255) NOT NULL,
-    epost VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
+CREATE TABLE Bestille (
+                          id INT AUTO_INCREMENT PRIMARY KEY,
+                          film VARCHAR(255),
+                          antall INT,
+                          fornavn VARCHAR(255),
+                          etternavn VARCHAR(255),
+                          telefonnr VARCHAR(255),
+                          epost VARCHAR(255)
 );
