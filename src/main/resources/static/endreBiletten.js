@@ -32,8 +32,8 @@ function endreBiletten() {
             window.location.href = 'index.html';
         },
         error: function(error) {
-            console.error("Error updating ticket:", error);
-            alert("An error occurred while updating the ticket.");
+            console.error("Feil med å oppdatere", error);
+            alert("En feil oppsto");
         }
     });
 }

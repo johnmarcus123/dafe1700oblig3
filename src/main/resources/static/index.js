@@ -16,7 +16,6 @@ function bestillBillett() {
 
     let isValid = true;
 
-    // Clear previous messages
     $('.validation-msg').text('');
 
     if (!film) {
@@ -91,7 +90,7 @@ function slettEnKunde(id) {
         type: 'DELETE',
         success: function() {
             alert('Billetten ble slettet');
-            window.location.href = 'index.html'; // Reload the page or update the UI as needed
+            window.location.href = 'index.html';
         },
         error: function(error) {
             alert("Det oppsto en feil");
