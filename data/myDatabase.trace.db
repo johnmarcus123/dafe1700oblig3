@@ -1,0 +1,21 @@
+2024-04-15 00:09:48.775494+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BESTILLE" not found (this database is empty); SQL statement:
+SELECT * FROM Bestille [42104-224]
+2024-04-15 00:09:57.437536+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BESTILLE" not found (this database is empty); SQL statement:
+SELECT * FROM Bestille [42104-224]
+2024-04-15 00:09:57.442540+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BESTILLE" not found (this database is empty); SQL statement:
+INSERT INTO Bestille (film, antall, fornavn, etternavn, telefonnr, epost) VALUES(?,?,?,?,?,?) [42104-224]
+2024-04-15 00:10:05.994709+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BESTILLE" not found (this database is empty); SQL statement:
+INSERT INTO Bestille (film, antall, fornavn, etternavn, telefonnr, epost) VALUES(?,?,?,?,?,?) [42104-224]
+2024-04-15 00:10:05.995713+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BESTILLE" not found (this database is empty); SQL statement:
+SELECT * FROM Bestille [42104-224]
+2024-04-15 00:10:07.018609+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BESTILLE" not found (this database is empty); SQL statement:
+INSERT INTO Bestille (film, antall, fornavn, etternavn, telefonnr, epost) VALUES(?,?,?,?,?,?) [42104-224]
+2024-04-15 00:10:07.020573+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BESTILLE" not found (this database is empty); SQL statement:
+SELECT * FROM Bestille [42104-224]
